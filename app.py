@@ -4,6 +4,7 @@ import numpy as np
 
 app = Flask(__name__)
 
+# load model
 model = pickle.load(open("model.pkl", "rb"))
 
 @app.route('/')
@@ -15,12 +16,15 @@ def predict():
 
     data = request.json
 
+    # inputs
+    turbidity = float(data['turbidity'])
+    do = float(data['do'])
     ph = float(data['ph'])
     temp = float(data['temp'])
-    do = float(data['do'])
-    turbidity = float(data['turbidity'])
+    bod = float(data['bod'])
 
-    features = np.array([[ph, temp, do, turbidity]])
+    # same order as training
+    features = np.array([[turbidity, do, ph, temp, bod]])
 
     prediction = model.predict(features)
 
@@ -29,4 +33,4 @@ def predict():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=10000)
