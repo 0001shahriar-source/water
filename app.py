@@ -5,7 +5,7 @@ import numpy as np
 app = Flask(__name__)
 
 # load model
-model = pickle.load(open("model.pkl", "rb"))
+model = pickle.load(open("random_forest_model.pkl", "rb"))
 
 @app.route('/')
 def home():
