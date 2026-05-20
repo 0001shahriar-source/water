@@ -20,7 +20,10 @@ def predict():
     turbidity = float(data['turbidity'])
     do = float(data['do'])
     ph = float(data['ph'])
-    temp = float(data['temp'])
+
+    # fixed temp
+    temp = 28.5
+
     bod = float(data['bod'])
 
     # same order as training
