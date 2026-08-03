@@ -13,22 +13,17 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-
     data = request.json
 
     # inputs
     turbidity = float(data['turbidity'])
     do = float(data['do'])
     ph = float(data['ph'])
-
-    # fixed temp
-    temp = 28.5
-
+    temp = float(data['temp'])   # now read from request instead of hardcoded
     bod = float(data['bod'])
 
     # same order as training
     features = np.array([[turbidity, do, ph, temp, bod]])
-
     prediction = model.predict(features)
 
     return jsonify({
